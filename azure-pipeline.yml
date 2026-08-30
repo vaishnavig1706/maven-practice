@@ -47,7 +47,7 @@ stages:
           scriptLocation: inlineScript
           inlineScript: |
             echo "Logging in to ACR..."
-            az acr login --name $(acrName)
+            az acr login -n vaishnaviregistry13601
   - stage: Getsecrets
     displayName: 'Get Secrets from Key Vault'
     dependsOn: Build
