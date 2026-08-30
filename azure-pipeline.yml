@@ -33,7 +33,7 @@ stages:
           latest
   - stage: Getsecrets
     displayName: 'Get Secrets from Key Vault'
-    dependsOn: Push
+    dependsOn: BuildPush
     jobs:
       - job: GetSecrets
         displayName: 'Retrieve Secrets'
@@ -53,7 +53,7 @@ stages:
   - stage: Deploy
     displayName: 'Deploy to AKS'
     dependsOn:
-      - Push 
+      - BuildPush 
       - Getsecrets
     jobs:
       - job: AKSDeployJob
