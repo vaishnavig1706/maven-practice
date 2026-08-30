@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-deployment
+  labels:
+    app: aks-demo
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: aks-demp
+  template:
+    metadata: 
+      labels:
+        app: aks-demo
+    spec:
+      containers:
+        - name: mycontainer
+          image: vaishnaviregistry13601.azurecr.io/mypythonimage:v1
+          ports:
+            - containerPort: 5000
+          env:
+            - name: app-secrets
+              valueFrom:
+                secretKetRef:
+                  name: app-secrets
+                  key: secret1
+
