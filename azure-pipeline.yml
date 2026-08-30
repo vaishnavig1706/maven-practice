@@ -15,7 +15,7 @@ stages:
   - stage: Build
     displayName: 'Build Docker Image'
     jobs:
-      - job: Build Job
+      - job: BuildJob
         displayName: 'Building Docker Image'
         pool:
           vmImage: 'ubuntu-latest'
@@ -33,7 +33,7 @@ stages:
     displayName: Push Image to ACR
     dependsOn: Build
     jobs:
-    - job: Push Image
+    - job: PushImage
       displayName: Push Docker Image
       pool: 
         vmImage: 'ubuntu-latest'
@@ -53,7 +53,6 @@ stages:
         inputs:
           command: push
           repository: $(imageName)
-          Dockerfile: Dockerfile
           containerRegistry: my-acr-sc
           tags: |
             $(imageTag)
