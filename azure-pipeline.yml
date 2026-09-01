@@ -18,7 +18,9 @@ stages:
       - job: BuildJob
         displayName: 'Building Docker Image'
         pool:
-          vmImage: 'myagent'
+          vmImage: 'vaishnavi'
+          demands:
+            - Agent.Name -equals myagent
         steps:
           - checkout: self
           - task: Docker@2
@@ -56,6 +58,7 @@ stages:
           command: push
           repository: $(imageName)
           Dockerfile: Dockerfile
+          containerRegistry: my-acr-sc
           tags: |
             $(imageTag)
   - stage: Getsecrets
@@ -65,7 +68,9 @@ stages:
       - job: GetSecrets
         displayName: 'Retrieve Secrets'
         pool:
-          vmImage: 'myagent'
+          vmImage: 'vaishnavi'
+          demands:
+            - Agent.Name -equals myagent
         steps:
           - task: AzureKeyVault@2
             inputs:
@@ -86,7 +91,9 @@ stages:
       - job: AKSDeployJob
         displayName: 'Deploying to AKS'
         pool:
-          vmImage: 'myagent'
+          vmImage: 'vaishnavi'
+          demands:
+            - Agent.Name -equals myagent
         steps:
           - checkout: self
           - task: AzureCLI@2
