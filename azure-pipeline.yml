@@ -18,7 +18,7 @@ stages:
       - job: BuildJob
         displayName: 'Building Docker Image'
         pool:
-          vmImage: 'vaishnavi'
+          name: 'vaishnavi'
           demands:
             - Agent.Name -equals myagent
         steps:
@@ -38,7 +38,9 @@ stages:
     - job: PushImage
       displayName: Push Docker Image
       pool:
-        vmImage: 'myagent'
+        name: 'vaishnavi'
+        demands:
+          - Agent.Name -equals myagent  
       steps:
       - checkout: self
       - task: AzureCLI@2
@@ -68,7 +70,7 @@ stages:
       - job: GetSecrets
         displayName: 'Retrieve Secrets'
         pool:
-          vmImage: 'vaishnavi'
+          name: 'vaishnavi'
           demands:
             - Agent.Name -equals myagent
         steps:
@@ -91,7 +93,7 @@ stages:
       - job: AKSDeployJob
         displayName: 'Deploying to AKS'
         pool:
-          vmImage: 'vaishnavi'
+          name: 'vaishnavi'
           demands:
             - Agent.Name -equals myagent
         steps:
