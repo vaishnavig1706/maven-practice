@@ -18,7 +18,7 @@ stages:
       - job: BuildJob
         displayName: 'Building Docker Image'
         pool:
-          vmImage: 'ubuntu-latest'
+          vmImage: 'myagent'
         steps:
           - checkout: self
           - task: Docker@2
@@ -36,7 +36,7 @@ stages:
     - job: PushImage
       displayName: Push Docker Image
       pool:
-        vmImage: 'ubuntu-latest'
+        vmImage: 'myagent'
       steps:
       - checkout: self
       - task: AzureCLI@2
@@ -65,7 +65,7 @@ stages:
       - job: GetSecrets
         displayName: 'Retrieve Secrets'
         pool:
-          vmImage: 'ubuntu-latest'
+          vmImage: 'myagent'
         steps:
           - task: AzureKeyVault@2
             inputs:
@@ -86,7 +86,7 @@ stages:
       - job: AKSDeployJob
         displayName: 'Deploying to AKS'
         pool:
-          vmImage: 'ubuntu-latest'
+          vmImage: 'myagent'
         steps:
           - checkout: self
           - task: AzureCLI@2
