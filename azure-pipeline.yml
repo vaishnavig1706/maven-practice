@@ -56,7 +56,6 @@ stages:
           command: push
           repository: $(imageName)
           Dockerfile: Dockerfile
-          containerRegistry: my-acr-sc
           tags: |
             $(imageTag)
   - stage: Getsecrets
