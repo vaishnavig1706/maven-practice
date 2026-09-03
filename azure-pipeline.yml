@@ -13,7 +13,7 @@ variables:
   imageTag: 'v1'
 stages:
   - stage: Build
-    displayName: 'Build Docker Images'
+    displayName: 'Build Docker Image'
     jobs:
       - job: BuildJob
         displayName: 'Building Docker Image'
